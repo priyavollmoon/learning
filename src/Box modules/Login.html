@@ -6,13 +6,61 @@
     <title>Document</title>
   </head>
   <body>
-    <h1 id="clr-change">hello world</h1>
-    <button onclick="colorChange()">change color</button>
+    <h1>Login</h1>
+    <form onsubmit="return handleSubmit()" id="form">
+      <input type="text" placeholder="username" id="username" />
+      <input type="password" placeholder="password" id="password" />
+      <button type="submit">Submit</button>
+    </form>
     <script>
-      function colorChange() {
-        const heading = document.getElementById("clr-change");
-        heading.style.color = "blue";
+      function handleSubmit() {
+
+        if (!localStorage.getItem("data")){
+          const userdetails={
+            username:"krish",
+            password:"1234moon"
+          }
+          localStorage.setItem("data",JSON.stringify(userdetails));
+        }
+        const name = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+        console.log("name", name);
+        console.log("password", password);
+
+        const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+        if (name.length < 3 && password.length < 8) {
+          alert("invalid user details");
+        }
+
+        if (!usernameRegex.test(name)) {
+          alert("wrong username");
+          return false;
+        }
+
+        if (!passwordRegex.test(password)) {
+          alert("wrong password");
+          return false;
+        }
+        
+       
+      const user=JSON.parse(localStorage.getItem("data"));
+        if(name === user.username && password === user.password){
+          alert("form submited successfully");
+          setTimeout(()=>{
+            document.getElementById("form").reset();
+          },1000)
+          window.location.href="welcome.html";
+        }else{
+          alert("wrong user details");
+          window.location.replace="Login.html";
+        }
+        return false;  
       }
     </script>
   </body>
 </html>
+<!-- setTimeout(()=>{
+  document.getElementById("form").reset();
+},3000); -->
