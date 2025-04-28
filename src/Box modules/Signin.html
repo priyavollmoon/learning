@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signin</title>
+  </head>
+
+  <body>
+    <form onsubmit="return handleSubmit()" id="form">
+      <input
+        type="text"
+        id="studentname"
+        placeholder="Student Name"
+        name="student name"
+      />
+      <input type="text" id="class" placeholder="StudentClass" name="class" />
+      <input type="text" id="address" placeholder="Address" name="address" />
+      <button type="submit">Add</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>StudentClass</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tablebody"></tbody>
+    </table>
+
+    <script>
+      let editedrow = null;
+
+      function handleDelete(button) {
+        const row = button.parentElement.parentElement;
+        row.remove();
+      }
+
+      function handleEdit(button) {
+        const row = button.parentElement.parentElement;
+        const col = row.querySelectorAll("td");
+
+        document.getElementById("studentname").value = col[0].textContent;
+        document.getElementById("class").value = col[1].textContent;
+        document.getElementById("address").value = col[2].textContent;
+        editedrow = row;
+      }
+
+      function handleSubmit() {
+        const StudentName = document.getElementById("studentname").value;
+        const StudentClass = document.getElementById("class").value;
+        const Address = document.getElementById("address").value;
+
+        const nameRegex = /^[A-Za-z\s]+$/;
+        const addressRegex = /^[A-Za-z0-9\s,.-@#&]+$/;
+        const classRegex = /^grade\s?(1[0-2]|[1-9])\s?[A-Za-z]?$/;
+
+        if (!nameRegex.test(StudentName)) {
+          alert("Give only name");
+          return false;
+        }
+        if (!classRegex.test(StudentClass)) {
+          alert("no class such as" + StudentClass);
+          return false;
+        }
+        if (!addressRegex.test(Address)) {
+          alert("not a valid address");
+          return false;
+        }
+
+        const tablebody = document.getElementById("tablebody");
+        const tablerows = tablebody.querySelectorAll("tr");
+
+        for (let i = 0; i < tablerows.length; i++) {
+          const column = tablerows[i].querySelectorAll("td");
+
+          if (
+            column[0].textContent.trim() === StudentName &&
+            column[1].textContent.trim() === StudentClass &&
+            column[2].textContent.trim() === Address
+          ) {
+            alert("Already this student details exist");
+            return false;
+          }
+        }
+
+        if (editedrow) {
+          const col = editedrow.querySelectorAll("td");
+          col[0].textContent = StudentName;
+          col[1].textContent = StudentClass;
+          col[2].textContent = Address;
+          editedrow = null;
+        } else {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+                    <td>${StudentName}</td>
+                    <td>${StudentClass}</td>
+                    <td>${Address}</td>
+                    <td>
+                        <button onClick="handleEdit(this)"> Edit</button>
+                        <button onClick="handleDelete(this)">Delete</button>
+                    </td>`;
+
+          tablebody.appendChild(row);
+        }
+
+        document.getElementById("form").reset();
+
+        return false;
+      }
+    </script>
+  </body>
+</html>
