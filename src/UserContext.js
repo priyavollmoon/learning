@@ -19,8 +19,7 @@ class UserContext extends Component {
 
 const {user}=this.props;
 console.log("user",user);
-const {name}=this.props;
-console.log("name",name);
+
 
 
   
@@ -46,9 +45,13 @@ console.log("name",name);
         
             <List
               bordered
+              size="large"
               dataSource={user} 
               renderItem={(item) => (
-    <List.Item key={item.id}><Typography.Text mark>{item.name}</Typography.Text> {item.email}</List.Item>
+    <List.Item key={item.id}><Typography.Text mark>{item.name}</Typography.Text>
+    <Typography>{item.email}</Typography>
+    </List.Item>
+    
               )}
             />
           </Col>

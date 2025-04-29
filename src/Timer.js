@@ -1,45 +1,79 @@
-import { Component } from "react";
-import UserContext from "./UserContext";
-import { Link, NavLink } from "react-router-dom";
-import { Col, Flex, Grid, Layout, List, Row, Space, Spin, Typography } from "antd";
+import { Button, Col, Input, List, Row } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Component } from "react";
+import "./Timer.css";
+
+// //conditional rendaring  style
+
 class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user:[],
-      loading:true,
+      user: [],
       time: 0,
+      isActive: true,
+      password: "",
+      passwordList: [],
     };
   }
 
   componentDidMount() {
     console.log("enter ");
-    this.Timer = setInterval(() => {
-      this.setState((prevState) => ({ time: prevState.time + 1 }));
-    }, 1000);
+    // this.Timer = setInterval(() => {
+    //   this.setState((prevState) => ({ time: prevState.time + 1 }));
+    // }, 1000);
 
     fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res)=>res.json())
-    .then((data)=>{
-      this.setState({user:data})
-      console.log("data",data);
-    })
-    .catch((error)=>console.log("error  fetchingusers",error))
-    this.setState({loading:false})
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ user: data });
+        console.log("data", data);
+      })
+      .catch((error) => console.log("error  fetchingusers", error));
+    
   }
- 
+  goToUserContext = () => {
+    this.props.navigate("/usercontext", {
+      state: {
+        name: "Rasika",
+        age: 25,
+        user: this.state.user,
+      },
+    });
+  };
+
   componentWillUnmount() {
     console.log("componentWillUnmount");
     clearInterval(this.Timer);
   }
+  handleInputChange = (e) => {
+    this.setState({ password: e.target.value });
+  };
 
+  handleButtonClick = () => {
+    console.log("Password Stored in state:", this.state.password);
+      localStorage.setItem("password",this.state.password);
+    this.setState((prevState) => ({
+      passwordList: [...prevState.passwordList, prevState.password],
+      password: "",
+    
+    }));
+  };
+
+  const 
   render() {
-    const name="rasika";
+    const buttonStyle = {
+      backgroundColor: this.state.isActive ? "green" : "gray",
+      color: "white",
+      padding: "10px",
+      borderRadius: "8px",
+    };
 
-    const {user,loading}=this.state;
+    const { passwordList } = this.state;
+
+    // react fragment
     return (
-      <div>
+      <>
         <Row className="bg-dark text-white text-center border rounded">
           <Col span={24}>
             <h1>Class Component</h1>
@@ -49,34 +83,32 @@ class Timer extends Component {
         <Row style={{ textAlign: "center" }}>
           <Col span={24}>
             <h2>Time update: {this.state.time}</h2>
+            <h3>state:{this.state.password}</h3>
+            <Button style={buttonStyle} onClick={this.goToUserContext}>
+              Go to UserContext123
+            </Button>
+            <Input
+              type="password"
+              value={this.state.password}
+              onChange={this.handleInputChange}
+              placeholder="Enter your password"
+            />
 
-            <UserContext name={name} age={25}  user={user}/>
-
-            <nav style={{ marginTop: "20px" }}>
-              <NavLink
-                to="/usercontext"
-                style={{
-                  textDecoration: "none",
-                  fontSize: "18px",
-                }}
-              >
-                Go to UserContext
-              </NavLink>
-            </nav>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={24}>
-          <List
+            <Button
+              type="primary"
+              onClick={this.handleButtonClick}
+              style={{ marginTop: "10px" }}
+            >
+              Submit
+            </Button>
+            <List
               bordered
-              dataSource={user} 
-              renderItem={(item) => (
-    <List.Item key={item.id}><Typography.Text mark>{item.name}</Typography.Text> {item.email}</List.Item>
-              )}
+              dataSource={passwordList}
+              renderItem={(item) => <List.Item>{item}</List.Item>}
             />
           </Col>
         </Row>
-      </div>
+      </>
     );
   }
 }
