@@ -14,15 +14,21 @@ class Timer extends Component {
       isActive: true,
       password: "",
       passwordList: [],
+      retrieved:''
     };
   }
 
   componentDidMount() {
     console.log("enter ");
-    // this.Timer = setInterval(() => {
-    //   this.setState((prevState) => ({ time: prevState.time + 1 }));
-    // }, 1000);
+    const Stored=localStorage.getItem("password" );
+    if(Stored){
+      this.setState({retrieved:Stored});
+    }
+    this.Timer = setInterval(() => {
+      this.setState((prevState) => ({ time: prevState.time + 1 }));
+    }, 1000);
 
+   
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
       .then((data) => {
@@ -60,7 +66,7 @@ class Timer extends Component {
     }));
   };
 
-  const 
+  
   render() {
     const buttonStyle = {
       backgroundColor: this.state.isActive ? "green" : "gray",
@@ -70,6 +76,7 @@ class Timer extends Component {
     };
 
     const { passwordList } = this.state;
+    const {retrieved}=this.state;
 
     // react fragment
     return (
@@ -84,6 +91,7 @@ class Timer extends Component {
           <Col span={24}>
             <h2>Time update: {this.state.time}</h2>
             <h3>state:{this.state.password}</h3>
+            <h3>retrieved data:{retrieved}</h3>
             <Button style={buttonStyle} onClick={this.goToUserContext}>
               Go to UserContext123
             </Button>
