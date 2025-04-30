@@ -14,7 +14,9 @@ class Timer extends Component {
       isActive: true,
       password: "",
       passwordList: [],
-      retrieved:''
+      retrieved:'',
+      username:"",
+      saved:[]
     };
   }
 
@@ -24,6 +26,13 @@ class Timer extends Component {
     if(Stored){
       this.setState({retrieved:Stored});
     }
+
+    const savedUsername=localStorage.getItem("username");
+    if(savedUsername){
+      this.setState({saved:JSON.parse(savedUsername)});
+    }
+    
+  
     this.Timer = setInterval(() => {
       this.setState((prevState) => ({ time: prevState.time + 1 }));
     }, 1000);
@@ -48,10 +57,10 @@ class Timer extends Component {
     });
   };
 
-  componentWillUnmount() {
-    console.log("componentWillUnmount");
-    clearInterval(this.Timer);
-  }
+  // componentWillUnmount() {
+  //   console.log("componentWillUnmount");
+  //   clearInterval(this.Timer);
+  // }
   handleInputChange = (e) => {
     this.setState({ password: e.target.value });
   };
@@ -66,6 +75,26 @@ class Timer extends Component {
     }));
   };
 
+  handleUsername=(e)=>{
+this.setState({username:e.target.value});
+  }
+
+  handleSaveUsername=()=>{
+    const {username,saved}=this.state;
+
+    if(username.trim() === ""){
+     alert("enter username");
+     return;
+    }
+    const updatedItem=[...saved,username];
+    this.setState({
+      saved:updatedItem,
+      username:""
+    })
+    sessionStorage.setItem("username",JSON.stringify(updatedItem));
+    alert("username stored");
+  }
+
   
   render() {
     const buttonStyle = {
@@ -77,6 +106,7 @@ class Timer extends Component {
 
     const { passwordList } = this.state;
     const {retrieved}=this.state;
+    const {saved}=this.state;
 
     // react fragment
     return (
@@ -109,10 +139,19 @@ class Timer extends Component {
             >
               Submit
             </Button>
+
+            <Input value={this.state.username} onChange={this.handleUsername} type="text" />
+            <Button type="default" onClick={this.handleSaveUsername}>Submit</Button>
             <List
               bordered
               dataSource={passwordList}
               renderItem={(item) => <List.Item>{item}</List.Item>}
+            />
+            <List
+            bordered
+            dataSource={saved}
+            renderItem={(item)=><List.Item>{item}</List.Item>}
+            
             />
           </Col>
         </Row>
