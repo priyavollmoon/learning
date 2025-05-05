@@ -2,9 +2,10 @@ import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import Timer from './App';
 import { BrowserRouter } from 'react-router-dom';
-import QuizApp from './Box modules/Hooks/QuizApp';
-import UseReducer from './Box modules/Hooks/UseReducer';
-
+import Todo from './Box modules/Hooks/Todo';
+import Hooks from './Box modules/Hooks/Hooks';
+import Provider from './Box modules/Hooks/Providers';
+import Providers from './Box modules/Hooks/Providers';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,8 +13,8 @@ root.render(
 
    <StrictMode>
       
-      <UseReducer/>
-      
+      <Todo/>
+      {/* <Providers/> */}
     
    </StrictMode>
    
