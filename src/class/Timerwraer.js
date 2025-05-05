@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Timer from './Timer';
+import Timer from './class/Timer';
 
 function TimerWrapper(props) {
   const navigate = useNavigate();

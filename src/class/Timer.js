@@ -1,5 +1,5 @@
 import { Button, Col, Input, List, Row } from "antd";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import { Component } from "react";
 import "./Timer.css";
 

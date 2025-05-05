@@ -5,7 +5,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: mediumpurple;
+  
   height: 100vh;
   overflow: hidden;
 }
@@ -67,4 +67,3 @@ body{
   background-color: red;
   transition:  1.5s;
 } */
-

@@ -1,29 +1,19 @@
-import React, { StrictMode } from 'react';
-import ReactDOM from 'react-dom/client';
-import Timer from './App';
-import { BrowserRouter } from 'react-router-dom';
-import Todo from './Box modules/Hooks/Todo';
-import Hooks from './Box modules/Hooks/Hooks';
-import Provider from './Box modules/Hooks/Providers';
-import Providers from './Box modules/Hooks/Providers';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { Provider } from "react-redux";
+import { store } from "./App/Store";
+import { BrowserRouter } from "react-router-dom";
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-
-   <StrictMode>
-      
-      <Todo/>
-      {/* <Providers/> */}
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
+   <BrowserRouter>
+   <App />
+   </BrowserRouter>
     
-   </StrictMode>
-   
-
-   
-  
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-
