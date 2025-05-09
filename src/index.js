@@ -19,17 +19,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     
   // </Provider>
   <StrictMode>
-    {/* <Providers>
+  {/* //   <Providers>
       
-          <Hooks/>
+  //         <Hooks/>
       
-    </Providers> */}
+  //   </Providers> */}
     <BrowserRouter>
     <Routing/>
     
     </BrowserRouter>
     
-  </StrictMode>
+   </StrictMode> 
 );
 
 // If you want to start measuring performance in your app, pass a function
