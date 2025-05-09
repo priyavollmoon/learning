@@ -19,16 +19,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     
   // </Provider>
   <StrictMode>
-  {/* //   <Providers>
-      
-  //         <Hooks/>
-      
-  //   </Providers> */}
     <BrowserRouter>
     <Routing/>
     
     </BrowserRouter>
-    
+  
    </StrictMode> 
 );
 
