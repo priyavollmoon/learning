@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from "mobx";
+import { action, makeAutoObservable, observable } from "mobx";
 import { json } from "react-router-dom";
 
 class Studentstore {
@@ -6,16 +6,20 @@ class Studentstore {
   isAuthenticate =  false;
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this,{
+      isAuthenticate:observable,
+      login:action,
+      logOut:action,
+      addStudent:action,
+      removeStudent:action
+    });
 
-     const savedAuth = localStorage.getItem("isAuthenticate");
-  this.setAuthFromStorage(savedAuth);
+   const savedAuth = localStorage.getItem("isAuthenticate");
+  this.isAuthenticate=JSON.parse(savedAuth)||false;
     const saved = localStorage.getItem("students");
     this.students = saved ? JSON.parse(saved) : [];
   }
-   setAuthFromStorage=action((value)=>{
-    this.isAuthenticate=JSON.parse(value)||false
-   });
+   
   login() {
     this.isAuthenticate = true;
     localStorage.setItem("isAuthenticate", JSON.stringify(true));

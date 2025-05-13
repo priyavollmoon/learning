@@ -18,16 +18,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   //  <BrowserRouter>
   //  <App />
   //  </BrowserRouter>
-    
   // </Provider>
   <StrictMode>
     <BrowserRouter>
-    <MainRoute/>
-    
+      <App/>
     </BrowserRouter>
-    
-  
-   </StrictMode> 
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

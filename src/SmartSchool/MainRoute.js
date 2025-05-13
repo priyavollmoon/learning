@@ -7,8 +7,8 @@ import ProtectedRouter from './ProtectedRouter'
 function ProtectedRoute() {
   return (
     <Routes>
-        <Route path="/" element={<Login/>}/>
-        <Route path='/DashBoard' element={<ProtectedRouter><Dashboard/></ProtectedRouter>}/>
+        <Route path='/' element={<Login/>}/>
+        <Route path='/DashBoard' element={<ProtectedRouter><Dashboard/></ProtectedRouter>  }/>
         
 
     </Routes>
