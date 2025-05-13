@@ -10,6 +10,8 @@ import ThemeProvider from "./Box modules/Hooks/ThemeProvider";
 import AuthorizeProvider from "./Box modules/Hooks/AuthorizeProvider";
 import Authenticate from "./Practice session 1/Authenticate";
 import Routing from "./Routing";
+import Login from "./SmartSchool/Login";
+import MainRoute from "./SmartSchool/MainRoute";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <Provider store={store}>
@@ -20,9 +22,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   // </Provider>
   <StrictMode>
     <BrowserRouter>
-    <Routing/>
+    <MainRoute/>
     
     </BrowserRouter>
+    
   
    </StrictMode> 
 );
