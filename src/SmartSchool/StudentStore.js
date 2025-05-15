@@ -7,15 +7,15 @@ class Studentstore {
 
   constructor() {
     makeAutoObservable(this,{
-      isAuthenticate:observable,
-      login:action,
-      logOut:action,
-      addStudent:action,
-      removeStudent:action
+  
+      login:true,
+      logOut:true,
+      addStudent:true,
+      removeStudent:true,
     });
 
    const savedAuth = localStorage.getItem("isAuthenticate");
-  this.isAuthenticate=JSON.parse(savedAuth)||false;
+  this.isAuthenticate=savedAuth === "true";
     const saved = localStorage.getItem("students");
     this.students = saved ? JSON.parse(saved) : [];
   }
