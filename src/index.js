@@ -12,6 +12,9 @@ import Authenticate from "./Practice session 1/Authenticate";
 import Routing from "./Routing";
 import Login from "./SmartSchool/Login";
 import MainRoute from "./SmartSchool/MainRoute";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <Provider store={store}>
@@ -19,16 +22,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   //  <App />
   //  </BrowserRouter>
   // </Provider>
+  <React.StrictMode>
+    <BrowserRouter>
+      <App/>
+       <ToastContainer position="top-right" autoClose={3000} />
+    </BrowserRouter>
+  </React.StrictMode>
   // <StrictMode>
-  //   <BrowserRouter>
-  //     <App/>
-  //   </BrowserRouter>
-  // </StrictMode>
-  <StrictMode>
-   <Provider store={store}>
-    <App/>
-   </Provider>
-   </StrictMode>
+  //  <Provider store={store}>
+  //   <App/>
+  //  </Provider>
+  //  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

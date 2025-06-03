@@ -1,37 +1,53 @@
-import React from 'react'
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 function Home() {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/book");
+        console.log("data", response);
+        setData(response.data.book);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+    fetchBooks();
+  }, []);
+
+  if (error) return <div>Error: {error}</div>;
   return (
-    <div className="" >
-     <div className="card custom-card  flex-column col-auto">
-      <div className="card-header">
-       <h2>Layout components</h2>
-       <div className="card-body">
-       <h6 className="card-text">Grid system -<mark>row,col</mark></h6>
-       <h6>Break points -<mark>col-sm,col-md,col-lg,col-xl</mark></h6>
-       <h6>Column and- Resonsive Layout<mark>col-auto,col-12</mark></h6>
-       <h6>Containers -<mark>container,container-fluid</mark></h6>
-       <h6>padding and margin-<mark>p-,m-</mark></h6>
-       </div>
-        
+    <div className="">
+      <div className="card custom-card  flex-column col-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>author</th>
+              <th>genre</th>
+              <th>publisher</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((book) => (
+              <tr key={book.id}>
+                <td>{book.id}</td>
+                <td>{book.name}</td>
+                <td>{book.author}</td>
+                <td>{book.genre}</td>
+                <td>{book.publisher}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
-    <div className=" card custom-card flex-column col-auto">
-        <div className="card-header">
-          <h2>Content components</h2>
-          <div className="card-body text-UpperCase">
-            <h6>Typograhy-<mark>h1,h2,h3..</mark></h6>
-            <h6>Image-<mark>image-fluid,image-thumbnail</mark></h6>
-            <h6>Figure-<mark>figure-caption,figure</mark></h6>
-
-          </div>
-
-      </div>
-    </div>
-   
-    </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

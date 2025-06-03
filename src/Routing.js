@@ -1,17 +1,20 @@
-import React from 'react'
-import { Route, Router, Routes } from 'react-router-dom'
-import Authenticate from './Practice session 1/Authenticate'
-import Welcome from './Practice session 1/Welcome'
+import React, { Suspense } from 'react'
+import { Route,  Routes } from 'react-router-dom';
 
 function Routing() {
+  const  LazyAuthenticate=React.lazy(()=>import('./Practice session 1/Authenticate'))
+  const  LazyWelcome=React.lazy(()=>import('./Practice session 1/Welcome'))
   return (
-    <div>
-
+    
+<Suspense fallback={<div>Loading......</div>}>
     <Routes>
-        <Route  path='/' element={<Authenticate/>}/>
-        <Route path='Welcome' element={<Welcome/>}/>
+        <Route  path='/' element={<LazyAuthenticate/>}/>
+        <Route path='welcome' element={<LazyWelcome/>}/>
     </Routes>
-    </div>
+
+</Suspense>
+  
+    
   )
 }
 

@@ -5,7 +5,7 @@ function Header() {
     <div>
          
               <header  > 
-                <h2 className="mb-4 ">Bootstrap Features Implement</h2>
+                <h2 className="mb-4 text-center  text-white bg-secondary rounded p-2">Bootstrap Features Implement</h2>
               </header>
     </div>
   )

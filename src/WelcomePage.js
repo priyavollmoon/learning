@@ -3,9 +3,6 @@ import {Button, Col, Flex, Layout, Row, Space}  from 'antd';
 import {  Menu } from 'antd';
 import { Link}from 'react-router-dom';
 import {BrowserRouter as Router ,Route,Routes}from 'react-router-dom';
-import Home from './Home';
-import Products from './Products';
-import Cart from './Cart';
 
 
 function WelcomePage() {
@@ -32,16 +29,16 @@ function WelcomePage() {
               <h1>Header Content</h1>
             </Header>
     
-          
+{/*           
             <Content style={{ margin: '24px 16px', padding: '24px', background: '#fff' }}>
             <Routes>
-            <Route path="/"  element={<WelcomePage/>}/>
-            <Route path="/Home" element={<Home />} />
+            {/* <Route path="/"  element={<WelcomePage/>}/>
+            <Route path="/home" element={<Home />} />
             <Route path="/Products" element={<Products/>} />
             <Route path="/Cart" element={<Cart />} />  
-            </Routes>           
-            
-          </Content>
+            </Routes>            */}
+             
+          {/* </Content*/} 
             <Footer style={{ textAlign: 'center' }}>
               contact us:rasikapriyabsc@gmail.com
             </Footer>
